@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Mapper.UserMapper">
+    <select id="findByUsername" parameterType="String" resultType="user">
+        select * from user where username=#{username}
+    </select>
+
+    <insert id="insertUser" parameterType="user">
+        insert into user (username,password) values (#{username},#{password})
+    </insert>
+
+    <select id="findList" parameterType="Map" resultType="User">
+        select * from user where username like #{username} limit #{offset},#{pageSize};
+    </select>
+
+    <select id="getCount" parameterType="Map" resultType="Integer">
+        select count(*) from user where username like #{username}
+    </select>
+
+    <update id="editUser" parameterType="user" >
+        update user set username=#{username},password=#{password} where id=#{id}
+    </update>
+</mapper>
