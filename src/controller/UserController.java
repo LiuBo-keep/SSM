@@ -148,10 +148,21 @@ public class UserController {
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
     @ResponseBody
     public Map<String,String> deleteUser(
-            @RequestParam(value = "ids[]",required = true) Long ids
+            @RequestParam(value = "ids[]",required = true) Long [] ids
     ){
         HashMap<String,String> map=new HashMap<String,String>();
-        map.put("ids",ids.toString());
+
+        if (ids==null){
+            map.put("type","error");
+            map.put("msg","请选择您要删除的用户");
+            return map;
+        }
+
+        for (int i=0;i<ids.length;i++){
+            userService.delete(ids[i]);
+        }
+        map.put("type","success");
+        map.put("msg","删除成功");
         return map;
     }
 }

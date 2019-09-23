@@ -16,4 +16,6 @@ public interface UserService {
     public List<User> findList(Map<String,Object> queryMap);
 
     public int getCount(Map<String,Object> queryMap);
+
+    public int delete(Long id);
 }

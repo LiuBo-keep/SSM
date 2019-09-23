@@ -22,4 +22,8 @@
     <update id="editUser" parameterType="user" >
         update user set username=#{username},password=#{password} where id=#{id}
     </update>
+
+    <delete id="delete" parameterType="Long">
+        delete from user where id=#{id}
+    </delete>
 </mapper>

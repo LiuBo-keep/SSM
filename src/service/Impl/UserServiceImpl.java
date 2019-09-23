@@ -39,4 +39,9 @@ public class UserServiceImpl implements UserService {
     public int getCount(Map<String, Object> queryMap) {
         return userMapper.getCount(queryMap);
     }
+
+    @Override
+    public int delete(Long id) {
+        return userMapper.delete(id);
+    }
 }
