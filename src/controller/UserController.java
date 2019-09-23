@@ -159,8 +159,13 @@ public class UserController {
         }
 
         for (int i=0;i<ids.length;i++){
-            userService.delete(ids[i]);
+            if (userService.delete(ids[i])<=0){
+                map.put("type","error");
+                map.put("msg","删除失败");
+                return map;
+            }
         }
+
         map.put("type","success");
         map.put("msg","删除成功");
         return map;
