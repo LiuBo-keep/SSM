@@ -23,7 +23,7 @@
         update user set username=#{username},password=#{password} where id=#{id}
     </update>
 
-    <delete id="delete" parameterType="Long">
-        delete from user where id=#{id}
+    <delete id="delete" parameterType="String">
+        delete from user where id in (${value})
     </delete>
 </mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Mapper.GradeMapper">
+
+    <insert id="insertUser" parameterType="grade">
+        insert into grade (name,remark) values (#{name},#{remark})
+    </insert>
+
+    <select id="findList" parameterType="Map" resultType="grade">
+        select * from grade where name like #{name} limit #{offset},#{pageSize};
+    </select>
+
+    <select id="getCount" parameterType="Map" resultType="Integer">
+        select count(*) from grade where name like #{name}
+    </select>
+
+    <update id="editUser" parameterType="grade" >
+        update grade set name=#{name},remark=#{remark} where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="String">
+        delete from grade where id in (${value})
+    </delete>
+</mapper>

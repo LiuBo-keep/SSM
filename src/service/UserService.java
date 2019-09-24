@@ -17,5 +17,5 @@ public interface UserService {
 
     public int getCount(Map<String,Object> queryMap);
 
-    public int delete(Long id);
+    public int delete(String id);
 }
