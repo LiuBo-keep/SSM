@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -246,6 +247,7 @@
         <div style="float: left;" class="datagrid-btn-separator"></div>
 		<div><a id="delete" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-some-delete',plain:true">删除</a>
             班级名：<input id="search-name" class="easyui-textbox" name="name"/>
+            年级编号：<input id="search-gradeId" class="easyui-textbox" name="gradeId"/>
             <a id="search_btn" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
         </div>
 	</div>
@@ -263,7 +265,11 @@
                 <tr>
                     <td>所属年级:</td>
                     <td>
-                        <input id="add_clazzId"  class="easyui-textbox" style="width: 200px; height: 30px;" type="combobox" name="clazzId" data-options="required:true, missingMessage:'请选择所属年级'" />
+                        <select id="add_clazzId"  class="easyui-combobox" style="width: 200px;"name="gradeId" data-options="required:true, missingMessage:'请选择所属年级'">
+                            <c:forEach items="${gradeList}" var="grade">
+                                <option value="${grade.id}">${grade.name}</option>
+                            </c:forEach>
+                        </select>
                     </td>
                 </tr>
 	    		<tr>

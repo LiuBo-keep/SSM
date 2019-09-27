@@ -1,14 +1,25 @@
 package bean;
 
-/**
- *
- * 年级实体
- */
-public class Grade {
 
-    private Long id;
-    private String name;
+/**
+ * 班级实体
+ *
+ */
+public class Clazz {
+    private Long id;//年级id
+    private String name;//年级名称
+    private Long gradeId;//年级id
     private String remark;//备注
+
+    public Clazz() {
+    }
+
+    public Clazz(Long id, Long gradeId, String name, String remark) {
+        this.id = id;
+        this.gradeId = gradeId;
+        this.name = name;
+        this.remark = remark;
+    }
 
     public Long getId() {
         return id;
@@ -16,6 +27,14 @@ public class Grade {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getGradeId() {
+        return gradeId;
+    }
+
+    public void setGradeId(Long gradeId) {
+        this.gradeId = gradeId;
     }
 
     public String getName() {
@@ -36,8 +55,9 @@ public class Grade {
 
     @Override
     public String toString() {
-        return "Grade{" +
+        return "Clazz{" +
                 "id=" + id +
+                ", gradeId=" + gradeId +
                 ", name='" + name + '\'' +
                 ", remark='" + remark + '\'' +
                 '}';

@@ -30,6 +30,11 @@ public class GradeServiceImpl implements GradeService {
     }
 
     @Override
+    public List<Grade> findAll() {
+        return gradeMapper.findAll();
+    }
+
+    @Override
     public int getCount(Map<String, Object> queryMap) {
         return gradeMapper.getCount(queryMap);
     }
