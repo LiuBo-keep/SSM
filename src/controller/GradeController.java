@@ -144,9 +144,15 @@ public class GradeController {
 
         idsString=idsString.substring(0,idsString.length()-1);
 
-        if (gradeService.delete(idsString)<=0){
+        try{
+            if (gradeService.delete(idsString)<=0){
+                map.put("type","error");
+                map.put("msg","删除失败");
+                return map;
+            }
+        }catch (Exception e){
             map.put("type","error");
-            map.put("msg","删除失败");
+            map.put("msg","该年级下存在班级信息，请勿冲动！");
             return map;
         }
 

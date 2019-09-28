@@ -8,9 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.ClazzService;
 import service.GradeService;
+import util.Page;
 
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +42,36 @@ public class ClazzController {
 
 
     /**
+     *
+     * 年级页面
+     *
+     */
+    @RequestMapping(value = "/get_list",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> getList(
+            @RequestParam(value = "name",required = false,defaultValue = "") String name,
+            @RequestParam(value = "gradeId",required = false,defaultValue = "") String gradeId,
+            Page page
+    ){
+        HashMap<String,Object> map=new HashMap<String,Object>();
+        HashMap<String,Object> message=new HashMap<String,Object>();
+        message.put("name","%"+name+"%");
+        message.put("gradeId",gradeId);
+        message.put("offset",page.getOffset());
+        message.put("pageSize",page.getRows());
+
+        List<Clazz> list=clazzService.findList(message);
+        for (Clazz clazz:list){
+            System.out.println(clazz);
+        }
+
+        map.put("rows",clazzService.findList(message));
+        map.put("total",clazzService.getCount(message));
+
+        return map;
+    }
+
+    /**
      * 添加
      *
      */
@@ -60,7 +92,7 @@ public class ClazzController {
         }
         if (StringUtils.isEmpty(clazz.getGradeId())){
             map.put("type","error");
-            map.put("msg","年级编号不能为空！");
+            map.put("msg","请选择所属年级！");
             return map;
         }
         if (clazzService.insertUser(clazz)<=0){

@@ -4,27 +4,27 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Mapper.ClazzMapper">
     <select id="findList" parameterType="Map" resultType="clazz">
-        select * from clazz where 1=1
-
+        select * from clazz
+        <where>
             <if test="name!=null and name!=''">
-                name=#{name}
+                and name like #{name}
             </if>
             <if test="gradeId!=null and gradeId!=''">
                 and gradeid=#{gradeId}
             </if>
-
+        </where>
         limit #{offset},#{pageSize};
     </select>
     <select id="getCount" parameterType="Map" resultType="Integer">
-        select * from clazz where 1=1
-
+        select count(*) from clazz
+        <where>
             <if test="name!=null and name!=''">
-                name=#{name}
+               and name like #{name}
             </if>
             <if test="gradeId!=null and gradeId!=''">
                 and gradeid=#{gradeId}
             </if>
-
+        </where>
     </select>
     
     <select id="findAll" resultType="clazz">

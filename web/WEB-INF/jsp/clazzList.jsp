@@ -16,31 +16,31 @@
 		var table;
 		
 		//datagrid初始化 
-	    $('#dataList').datagrid({ 
-	        title:'班级列表',
-	        iconCls:'icon-more',//图标 
-	        border: true, 
-	        collapsible:false,//是否可折叠的 
-	        fit: true,//自动大小 
-	        method: "post",
-	        url:"get_list?t="+new Date().getTime(),
-	        idField:'id', 
-	        singleSelect:false,//是否单选 
-	        pagination:true,//分页控件 
-	        rownumbers:true,//行号 
-	        sortName:'id',
-	        sortOrder:'DESC', 
-	        remoteSort: false,
-	        columns: [[  
-				{field:'chk',checkbox: true,width:50},
- 		        {field:'id',title:'ID',width:50, sortable: true},
- 		        {field:'name',title:'年级名',width:150,sortable:true},
-                {field:'clazzId',title:'所属年级',width:150,sortable:true},
- 		        {field:'remark',title:'备注',width:300},
-	 		]],
-	        toolbar: "#toolbar"
-	    }); 
-	    //设置分页控件 
+        $('#dataList').datagrid({
+            title:'年级列表',
+            iconCls:'icon-more',//图标
+            border: true,
+            collapsible:false,//是否可折叠的
+            fit: true,//自动大小
+            method: "post",
+            url:"get_list?t="+new Date().getTime(),
+            idField:'id',
+            singleSelect:false,//是否单选
+            pagination:true,//分页控件
+            rownumbers:true,//行号
+            sortName:'id',
+            sortOrder:'DESC',
+            remoteSort: false,
+            columns: [[
+                {field:'chk',checkbox: true,width:50},
+                {field:'id',title:'ID',width:50, sortable: true},
+                {field:'name',title:'年级名',width:150},
+                {field:'gradeId',title:'所属年级',width:150},
+                {field:'remark',title:'备注',width:300},
+            ]],
+            toolbar: "#toolbar"
+        });
+        //设置分页控件
 	    var p = $('#dataList').datagrid('getPager'); 
 	    $(p).pagination({ 
 	        pageSize: 10,//每页显示的记录条数，默认为10 
