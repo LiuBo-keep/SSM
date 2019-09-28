@@ -7,7 +7,7 @@
         select * from clazz
         <where>
             <if test="name!=null and name!=''">
-                and name like #{name}
+                name like #{name}
             </if>
             <if test="gradeId!=null and gradeId!=''">
                 and gradeid=#{gradeId}
@@ -19,7 +19,7 @@
         select count(*) from clazz
         <where>
             <if test="name!=null and name!=''">
-               and name like #{name}
+                name like #{name}
             </if>
             <if test="gradeId!=null and gradeId!=''">
                 and gradeid=#{gradeId}

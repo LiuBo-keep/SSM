@@ -2,6 +2,7 @@ package controller;
 
 import bean.Clazz;
 import bean.Grade;
+import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +38,7 @@ public class ClazzController {
     public String clazzList(Model model){
         List<Grade> gradeList=gradeService.findAll();
         model.addAttribute("gradeList",gradeList);
+        model.addAttribute("gradeListJson",JSONArray.fromObject(gradeList));//java对象转换为json对象并放到域中
         return "clazzList";
     }
 

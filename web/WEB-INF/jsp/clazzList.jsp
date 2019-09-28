@@ -12,9 +12,9 @@
 	<script type="text/javascript" src="../../easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="../../easyui/js/validateExtends.js"></script>
 	<script type="text/javascript">
+    var gradeList=${gradeListJson};
 	$(function() {	
 		var table;
-		
 		//datagrid初始化 
         $('#dataList').datagrid({
             title:'年级列表',
