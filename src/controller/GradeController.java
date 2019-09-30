@@ -156,7 +156,7 @@ public class GradeController {
             return map;
         }
 
-        map.put("type","error");
+        map.put("type","success ");
         map.put("msg","删除成功！");
         return map;
     }

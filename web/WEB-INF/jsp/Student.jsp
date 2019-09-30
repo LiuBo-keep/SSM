@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>班级列表</title>
+    <title>学生列表</title>
     <link rel="stylesheet" type="text/css" href="../../easyui/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="../../easyui/themes/icon.css">
     <link rel="stylesheet" type="text/css" href="../../easyui/css/demo.css">
@@ -12,12 +12,13 @@
     <script type="text/javascript" src="../../easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="../../easyui/js/validateExtends.js"></script>
     <script type="text/javascript">
-        var JSONArr=${gradeListJson};
+        var clazzJsonArr=${clazzListJson};
+        var gradeJsonArr=${gradeListJson};
         $(function() {
             var table;
             //datagrid初始化
             $('#dataList').datagrid({
-                title:'年级列表',
+                title:'学生列表',
                 iconCls:'icon-more',//图标
                 border: true,
                 collapsible:false,//是否可折叠的
@@ -34,17 +35,8 @@
                 columns: [[
                     {field:'chk',checkbox: true,width:50},
                     {field:'id',title:'ID',width:50, sortable: true},
-                    {field:'name',title:'年级名',width:150},
-                    {field:'gradeId',title:'所属年级',width:150,
-                        formatter:function (value,index,row) {
-                        for (var i=0;i<JSONArr.length;i++){
-                            if (JSONArr[i].id==value){
-                                return JSONArr[i].name;
-                            }
-                        }
-                        return value;
-                    }
-                    },
+                    {field:'name',title:'学生名',width:150},
+                    {field:'gradeId',title:'所属年级',width:150},
                     {field:'remark',title:'备注',width:300},
                 ]],
                 toolbar: "#toolbar"
@@ -110,7 +102,7 @@
 
             //设置添加窗口
             $("#addDialog").dialog({
-                title: "添加班级",
+                title: "学生班级",
                 width: 450,
                 height: 400,
                 iconCls: "icon-add",
@@ -167,7 +159,7 @@
 
             //编辑用户信息
             $("#editDialog").dialog({
-                title: "修改班级信息",
+                title: "修改学生信息",
                 width: 450,
                 height: 400,
                 iconCls: "icon-edit",
@@ -259,10 +251,10 @@
     <div><a id="delete" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-some-delete',plain:true">删除</a>
         班级名：<input id="search-name" class="easyui-textbox" name="name"/>
         搜索年级：<select id="search-gradeId" class="easyui-combobox" name="gradeId" style="width: 150px">
-                 <option value="">全部</option>
-        <c:forEach items="${gradeList}" var="grade">
+            <option value="">全部</option>
+            <c:forEach items="${gradeList}" var="grade">
                 <option value="${grade.id}">${grade.name}</option>
-        </c:forEach>
+            </c:forEach>
         </select>
         <a id="search_btn" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
     </div>
@@ -273,7 +265,7 @@
     <form id="addForm" method="post">
         <table id="addTable" cellpadding="8">
             <tr>
-                <td>班级名:</td>
+                <td>学生名:</td>
                 <td>
                     <input id="add_name"  class="easyui-textbox" style="width: 200px; height: 30px;" type="text" name="name" data-options="required:true, validType:'repeat', missingMessage:'请填写年级名'" />
                 </td>
@@ -302,7 +294,7 @@
         <input type="hidden" name="id" id="edit-id">
         <table id="editTable" border=0 cellpadding="8" >
             <tr>
-                <td>班级名:</td>
+                <td>学生名:</td>
                 <td>
                     <input id="edit_name"  class="easyui-textbox" style="width: 200px; height: 30px;" type="text" name="name" data-options="required:true, validType:'repeat', missingMessage:'请填写年级名'" />
                 </td>
