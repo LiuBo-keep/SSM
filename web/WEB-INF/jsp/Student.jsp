@@ -13,7 +13,6 @@
     <script type="text/javascript" src="../../easyui/js/validateExtends.js"></script>
     <script type="text/javascript">
         var clazzJsonArr=${clazzListJson};
-        var gradeJsonArr=${gradeListJson};
         $(function() {
             var table;
             //datagrid初始化
@@ -35,9 +34,19 @@
                 columns: [[
                     {field:'chk',checkbox: true,width:50},
                     {field:'id',title:'ID',width:50, sortable: true},
-                    {field:'name',title:'学生名',width:150},
-                    {field:'gradeId',title:'所属年级',width:150},
-                    {field:'remark',title:'备注',width:300},
+                    {field:'username',title:'姓名',width:150},
+                    {field:'sn',title:'学号',width:150},
+                    {field:'sex',title:'性别',width:150},
+                    {field:'clazzId',title:'所属班级',width:150,formatter:function (value,index,row) {
+                            for (var i=0;i<clazzJsonArr.length;i++) {
+                                if (clazzJsonArr[i].id==value){
+                                    return clazzJsonArr[i].name;
+                                }
+                            }
+                            return value;
+                        }},
+                    {field:'password',title:'密码',width:150},
+                    
                 ]],
                 toolbar: "#toolbar"
             });
@@ -104,7 +113,7 @@
             $("#addDialog").dialog({
                 title: "学生班级",
                 width: 450,
-                height: 400,
+                height: 600,
                 iconCls: "icon-add",
                 modal: true,
                 collapsible: false,
@@ -161,7 +170,7 @@
             $("#editDialog").dialog({
                 title: "修改学生信息",
                 width: 450,
-                height: 400,
+                height: 600,
                 iconCls: "icon-edit",
                 modal: true,
                 collapsible: false,
@@ -262,21 +271,44 @@
 
 <!-- 添加窗口 -->
 <div id="addDialog" style="padding: 10px;">
-    <form id="addForm" method="post">
+        <form id="addForm" method="post">
         <table id="addTable" cellpadding="8">
             <tr>
-                <td>学生名:</td>
+                <td>学生头像:</td>
                 <td>
-                    <input id="add_name"  class="easyui-textbox" style="width: 200px; height: 30px;" type="text" name="name" data-options="required:true, validType:'repeat', missingMessage:'请填写年级名'" />
+                    <img id="edit_photo" alt="照片" style="max-width: 100px; max-height: 100px;" title="照片" src="../../photo/0.jpg" />
+                    <a id="upload-btn" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">上传图片</a>
+                    <input id="add_photo" type="hidden" name="photo" value="../../photo/0.jpg"/>
                 </td>
             </tr>
             <tr>
-                <td>所属年级:</td>
+                <td>学生姓名:</td>
                 <td>
-                    <select id="add_clazzId"  class="easyui-combobox" style="width: 200px;"name="gradeId" data-options="required:true, missingMessage:'请选择所属年级'">
+                    <input id="add_name"  class="easyui-textbox" style="width: 200px; height: 30px;" type="text" name="username" data-options="required:true, validType:'repeat', missingMessage:'请填写学生姓名'" />
+                </td>
+            </tr>
+            <tr>
+                <td>登录密码:</td>
+                <td>
+                    <input id="add_password"  class="easyui-textbox" style="width: 200px; height: 30px;" type="password" name="password" data-options="required:true, validType:'repeat', missingMessage:'请填登录密码'" />
+                </td>
+            </tr>
+            <tr>
+                <td>所属班级:</td>
+                <td>
+                    <select id="add_clazzId"  class="easyui-combobox" style="width: 200px;"name="clazzId" data-options="required:true, missingMessage:'请选择所属班级'">
                         <c:forEach items="${gradeList}" var="grade">
                             <option value="${grade.id}">${grade.name}</option>
                         </c:forEach>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>学生性别:</td>
+                <td>
+                    <select id="add_sex"  class="easyui-combobox" style="width: 200px;"name="sex" data-options="required:true, missingMessage:'请选择所学生性别'">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
                     </select>
                 </td>
             </tr>
@@ -317,6 +349,7 @@
     </form>
 </div>
 
-
+<!-- 提交表单处理iframe框架 -->
+<iframe id="photo_target" name="photo_target"></iframe>
 </body>
 </html>

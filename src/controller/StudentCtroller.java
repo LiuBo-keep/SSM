@@ -33,8 +33,6 @@ public class StudentCtroller {
         List<Grade> gradeList=gradeService.findAll();
         model.addAttribute("clazzList",clazzList);
         model.addAttribute("clazzListJson",JSONArray.fromObject(clazzList));
-        model.addAttribute("gradeList",gradeList);
-        model.addAttribute("gradeListJson",JSONArray.fromObject(gradeList));
         return "Student";
     }
 }
