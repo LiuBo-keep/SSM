@@ -24,7 +24,6 @@ import java.util.UUID;
 
 /**
  * 学生信息管理
- *
  */
 
 @RequestMapping(value = "/student")
@@ -45,7 +44,6 @@ public class StudentCtroller {
     }
 
     /**
-     *
      * 上传头像
      */
     @RequestMapping(value = "/upload_photo",method = RequestMethod.POST)
