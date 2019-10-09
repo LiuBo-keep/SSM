@@ -9,10 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import service.ClazzService;
 import service.StudentService;
+import util.Page;
 import util.SnUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +45,38 @@ public class StudentCtroller {
         model.addAttribute("clazzList",clazzList);
         model.addAttribute("clazzListJson",JSONArray.fromObject(clazzList));
         return "Student";
+    }
+
+    /**
+     * 学生页面
+     */
+    @RequestMapping(value = "/get_list",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> getList(
+            @RequestParam(value = "username",required = false,defaultValue = "") String username,
+            @RequestParam(value = "clazzId",required = false,defaultValue = "") Long clazzid,
+            Page page
+
+    ){
+        Map<String,Object> map=new HashMap<String,Object>();
+        Map<String,Object> mansge=new HashMap<String,Object>();
+        mansge.put("username","%"+username+"%");
+        mansge.put("clazzId",clazzid);
+        mansge.put("offset",page.getOffset());
+        mansge.put("pageSize",page.getRows());
+
+        List<Student> list=studentService.findList(mansge);
+        for (Student student:list){
+            System.out.println(student);
+        }
+
+        int i=studentService.getCount(mansge);
+        System.out.println(i);
+
+        map.put("rows",list);
+        map.put("total",i);
+
+        return map;
     }
 
     /**

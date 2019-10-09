@@ -10,8 +10,8 @@ import java.util.Map;
 public interface StudentMapper {
     //添加
     public int addStudent(Student student);
-
-    public List<Student> findList(Map<String,Object> queryMap);
-
-    public int getCount(Map<String,Object> queryMap);
+    //结果集
+    public List<Student> findList(Map<String,Object> mansge);
+    //总行数
+    public int getCount(Map<String,Object> mansge);
 }

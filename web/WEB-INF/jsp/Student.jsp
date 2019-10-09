@@ -290,10 +290,10 @@
     <div style="float: left;" class="datagrid-btn-separator"></div>
     <div><a id="delete" href="javascript:;" class="easyui-linkbutton"
             data-options="iconCls:'icon-some-delete',plain:true">删除</a>
-        班级名：<input id="search-name" class="easyui-textbox" name="name"/>
-        搜索年级：<select id="search-gradeId" class="easyui-combobox" name="gradeId" style="width: 150px">
+        学生名：<input id="search-name" class="easyui-textbox" name="username"/>
+        搜索班级：<select id="search-gradeId" class="easyui-combobox" name="clazzId" style="width: 150px">
             <option value="">全部</option>
-            <c:forEach items="${gradeList}" var="grade">
+            <c:forEach items="${clazzList}" var="grade">
                 <option value="${grade.id}">${grade.name}</option>
             </c:forEach>
         </select>
