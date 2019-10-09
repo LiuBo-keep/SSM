@@ -146,8 +146,8 @@
                                             //关闭窗口
                                             $("#addDialog").dialog("close");
                                             //清空原表格数据
-                                            $("#add_name").textbox('setValue', "");
-                                            $("#add_remark").textbox('setValue', "");
+                                            $("#add_username").textbox('setValue', "");
+                                            $("#add_password").textbox('setValue', "");
                                             //重新刷新页面数据
                                             $('#dataList').datagrid("reload");
 
@@ -162,8 +162,8 @@
                     },
                 ],
                 onClose: function () {
-                    $("#add_name").textbox('setValue', "");
-                    $("#add_remark").textbox('setValue', "");
+                    $("#add_username").textbox('setValue', "");
+                    $("#add_password").textbox('setValue', "");
                 }
             });
 
