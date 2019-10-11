@@ -29,4 +29,9 @@ public class StudentServiceImpl implements StudentService {
     public int getCount(Map<String, Object> mansge) {
         return studentMapper.getCount(mansge);
     }
+
+    @Override
+    public int deleteStudent(Long[] ids) {
+        return studentMapper.deleteStudent(ids);
+    }
 }

@@ -35,4 +35,12 @@
         </where>
     </select>
 
+    <!--删除-->
+    <delete id="deleteStudent" parameterType="Long">
+        delete from student
+        where id in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

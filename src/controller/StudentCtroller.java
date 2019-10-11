@@ -4,6 +4,7 @@ import bean.Clazz;
 import bean.Student;
 import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -64,12 +65,7 @@ public class StudentCtroller {
         mansge.put("clazzId",clazzid);
         mansge.put("offset",page.getOffset());
         mansge.put("pageSize",page.getRows());
-
         List<Student> list=studentService.findList(mansge);
-        for (Student student:list){
-            System.out.println(student);
-        }
-
         int i=studentService.getCount(mansge);
         System.out.println(i);
 
@@ -161,6 +157,30 @@ public class StudentCtroller {
         }
         map.put("type","success");
         map.put("msg","添加成功");
+        return map;
+    }
+
+    /**
+     * 删除学生
+     */
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,String> deleteStudent(
+           @RequestParam(value = "ids[]") Long [] ids
+    ){
+        Map<String,String> map=new HashMap<String,String>();
+      if (ids==null || ids.length==0){
+          map.put("type","error");
+          map.put("msg","请选择你要删除的数据");
+          return map;
+      }
+        if (studentService.deleteStudent(ids)<=0){
+            map.put("type","error");
+            map.put("msg","删除失败");
+            return map;
+        }
+        map.put("type","success");
+        map.put("msg","删除成功！");
         return map;
     }
 }

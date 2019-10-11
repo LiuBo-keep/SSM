@@ -14,4 +14,6 @@ public interface StudentMapper {
     public List<Student> findList(Map<String,Object> mansge);
     //总行数
     public int getCount(Map<String,Object> mansge);
+    //删除
+    public int deleteStudent(Long [] ids);
 }
