@@ -183,4 +183,37 @@ public class StudentCtroller {
         map.put("msg","删除成功！");
         return map;
     }
+
+    /**
+     * 修改
+     */
+    @RequestMapping(value = "/edit",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,String> editStudent(Student student){
+        Map<String,String> map=new HashMap<String,String>();
+        if (student==null){
+            map.put("type","error");
+            map.put("msg","数据绑定出错，请联系开发者!");
+            return map;
+        }
+        if (StringUtils.isEmpty(student.getUsername())){
+            map.put("type","error");
+            map.put("msg","姓名不能为空！");
+            return map;
+        }
+        if (StringUtils.isEmpty(student.getClazzId())){
+            map.put("type","error");
+            map.put("msg","所属班级不能为空！");
+            return map;
+        }
+        if (studentService.updateStudent(student)<=0){
+            map.put("type","error");
+            map.put("msg","修改失败");
+            return map;
+        }
+        map.put("type","success");
+        map.put("msg","修改成功");
+        return map;
+    }
+
 }

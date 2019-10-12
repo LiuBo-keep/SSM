@@ -16,4 +16,8 @@ public interface StudentMapper {
     public int getCount(Map<String,Object> mansge);
     //删除
     public int deleteStudent(Long [] ids);
+    //修改
+    public int updateStudent(Student student);
+    //查询单个
+    public Student findStrudent(String username);
 }

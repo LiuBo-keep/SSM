@@ -1,5 +1,6 @@
 package controller;
 
+import bean.Student;
 import bean.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import service.StudentService;
 import service.UserService;
 import util.CpachaUtil;
 
@@ -27,6 +29,8 @@ public class loginController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private StudentService studentService;
 
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String index(){
@@ -87,6 +91,7 @@ public class loginController {
 
         //从数据库中查找用户
         User user=userService.findByUsername(username);
+        Student student=studentService.findStrudent(username);
         if (type==1){
             //管理员
             if (user==null){
@@ -103,6 +108,17 @@ public class loginController {
         }
         if (type==2){
             //学生
+            if (student==null){
+                map.put("type","error");
+                map.put("msg","该学生不存在");
+                return map;
+            }
+            if (!password.equals(student.getPassword())){
+                map.put("type","error");
+                map.put("msg","密码错误");
+                return map;
+            }
+            request.getSession().setAttribute("student",student);
         }
 
         map.put("type","success");

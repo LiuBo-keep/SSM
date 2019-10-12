@@ -5,6 +5,7 @@ package interceptor;
  *
  */
 
+import bean.Student;
 import bean.User;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import net.sf.json.JSONObject;
@@ -21,6 +22,7 @@ public class LoginInterceptor implements HandlerInterceptor {
          String url=request.getRequestURI();
          System.out.println("进入拦截器,url="+url);
          User  user=(User) request.getSession().getAttribute("user");
+         Student student= (Student) request.getSession().getAttribute("student");
          if (user==null){
              System.out.println("未登录或登录以时效，url="+url);
 

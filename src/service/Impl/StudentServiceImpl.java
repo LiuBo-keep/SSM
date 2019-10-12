@@ -34,4 +34,14 @@ public class StudentServiceImpl implements StudentService {
     public int deleteStudent(Long[] ids) {
         return studentMapper.deleteStudent(ids);
     }
+
+    @Override
+    public int updateStudent(Student student) {
+        return studentMapper.updateStudent(student);
+    }
+
+    @Override
+    public Student findStrudent(String username) {
+        return studentMapper.findStrudent(username);
+    }
 }

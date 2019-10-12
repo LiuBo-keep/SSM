@@ -172,7 +172,7 @@
             $("#editDialog").dialog({
                 title: "修改学生信息",
                 width: 450,
-                height: 600,
+                height: 650,
                 iconCls: "icon-edit",
                 modal: true,
                 collapsible: false,
@@ -221,8 +221,10 @@
                     var selectRow = $("#dataList").datagrid("getSelected");
                     //设置值
                     $("#edit-id").val(selectRow.id);
-                    $("#edit_name").textbox('setValue', selectRow.name);
-                    $("#edit_gradeId").combobox('setValue', selectRow.gradeId);
+                    $("#edit_username").textbox('setValue', selectRow.username);
+                    $("#edit_clazzId").combobox('setValue', selectRow.clazzId);
+                    $("#edit_password").textbox('setValue', selectRow.password);
+                    $("#edit_sex").combobox('setValue', selectRow.sex);
                     $("#edit_remark").textbox('setValue', selectRow.remark);
                 }
             });
@@ -253,6 +255,13 @@
                 }
                 $("#photoForm").submit();
             })
+            $("#edit-upload-btn").click(function(){
+                if($("#edit-upload-photo").filebox("getValue") == ''){
+                    $.messager.alert("消息提醒","请选择图片文件!","warning");
+                    return;
+                }
+                $("#editPhotoForm").submit();
+            });
         });
         
         function uploaded(e) {
@@ -365,31 +374,61 @@
 
 <!-- 修改窗口 -->
 <div id="editDialog" style="padding: 10px">
-    <form id="editForm" method="post">
-        <input type="hidden" name="id" id="edit-id">
-        <table id="editTable" border=0 cellpadding="8">
-            <tr>
-                <td>学生名:</td>
+    <form id="editPhotoForm" method="post" enctype="multipart/form-data" action="upload_photo" target="photo_target">
+        <table id="editTable1" cellpadding="8">
+            <tr >
+                <td>预览头像:</td>
                 <td>
-                    <input id="edit_name" class="easyui-textbox" style="width: 200px; height: 30px;" type="text"
-                           name="name" data-options="required:true, validType:'repeat', missingMessage:'请填写年级名'"/>
+                    <img id="edis-photo-preview" alt="照片" style="max-width: 100px; max-height: 100px;" title="照片" src="/photo/0227aa0c322e4515a02fefe8285bbca3.jpg" />
                 </td>
             </tr>
-            <tr>
-                <td>所属年级:</td>
+            <tr >
+                <td>学生头像:</td>
                 <td>
-                    <select id="edit_gradeId" class="easyui-combobox" style="width: 200px;" name="gradeId"
-                            data-options="required:true, missingMessage:'请选择所属年级'">
-                        <c:forEach items="${gradeList}" var="grade">
-                            <option value="${grade.id}">${grade.name}</option>
+                    <input id="edit-upload-photo" class="easyui-filebox" name="photo" data-options="prompt:'选择照片'" style="width:200px;">
+                    <a id="edit-upload-btn" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">上传图片</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <form id="editForm" method="post">
+        <input type="hidden" name="id" id="edit-id">
+        <table id="editTable2" cellpadding="8">
+            <input id="edit_photo" type="hidden" name="photo" value="/photo/0227aa0c322e4515a02fefe8285bbca3.jpg"  />
+            <tr >
+                <td>学生姓名:</td>
+                <td>
+                    <input id="edit_username"  class="easyui-textbox" style="width: 200px; height: 30px;" type="text" name="username" data-options="required:true, missingMessage:'请填写学生姓名'"  />
+                </td>
+            </tr>
+            <tr >
+                <td>登录密码:</td>
+                <td>
+                    <input id="edit_password"  class="easyui-textbox" style="width: 200px; height: 30px;" type="password" name="password" data-options="required:true, missingMessage:'请填写登录密码'"  />
+                </td>
+            </tr>
+            <tr >
+                <td>所属班级:</td>
+                <td>
+                    <select id="edit_clazzId"  class="easyui-combobox" style="width: 200px;" name="clazzId" data-options="required:true, missingMessage:'请选择所属班级'">
+                        <c:forEach items="${ clazzList}" var="clazz">
+                            <option value="${clazz.id }">${clazz.name }</option>
                         </c:forEach>
+                    </select>
+                </td>
+            </tr>
+            <tr >
+                <td>学生性别:</td>
+                <td>
+                    <select id="edit_sex"  class="easyui-combobox" style="width: 200px;" name="sex" data-options="required:true, missingMessage:'请选择学生性别'">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
                     </select>
                 </td>
             </tr>
             <tr>
                 <td>备注:</td>
-                <td><input id="edit_remark" style="width: 256px; height: 180px;" class="easyui-textbox" type="text"
-                           name="remark" data-options="multiline:true"/></td>
+                <td><input id="edit_remark" style="width: 256px; height: 180px;" class="easyui-textbox" type="text" name="remark" data-options="multiline:true"  /></td>
             </tr>
         </table>
     </form>

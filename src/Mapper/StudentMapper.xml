@@ -43,4 +43,14 @@
             #{id}
         </foreach>
     </delete>
+
+    <!--修改-->
+    <update id="updateStudent" parameterType="Student">
+        update student set username=#{username},password=#{password},sex=#{sex},photo=#{photo},remark=#{remark} where id=#{id}
+    </update>
+
+    <!--查询单个-->
+    <select id="findStrudent" parameterType="String" resultType="student">
+        select * from student where username=#{username}
+    </select>
 </mapper>
