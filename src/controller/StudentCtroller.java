@@ -56,19 +56,26 @@ public class StudentCtroller {
     public Map<String,Object> getList(
             @RequestParam(value = "username",required = false,defaultValue = "") String username,
             @RequestParam(value = "clazzId",required = false,defaultValue = "") Long clazzid,
+            HttpServletRequest request,
             Page page
 
     ){
         Map<String,Object> map=new HashMap<String,Object>();
         Map<String,Object> mansge=new HashMap<String,Object>();
         mansge.put("username","%"+username+"%");
+        Object attribute=request.getSession().getAttribute("userType");
+
+        if ("2".equals(attribute.toString())){
+            //说明是学生
+            Student loginStudent= (Student) request.getSession().getAttribute("user");
+            mansge.put("username","%"+loginStudent.getUsername()+"%");
+        }
+
         mansge.put("clazzId",clazzid);
         mansge.put("offset",page.getOffset());
         mansge.put("pageSize",page.getRows());
         List<Student> list=studentService.findList(mansge);
         int i=studentService.getCount(mansge);
-        System.out.println(i);
-
         map.put("rows",list);
         map.put("total",i);
 

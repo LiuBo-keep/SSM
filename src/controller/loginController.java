@@ -38,6 +38,16 @@ public class loginController {
     }
 
     /**
+     * 安全退出
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/login_out",method = RequestMethod.GET)
+    public String login(HttpServletRequest request){
+        request.getSession().setAttribute("user",null);
+        return "redirect:login";
+    }
+    /**
      * 登录页面
      * @param model
      * @return
@@ -118,9 +128,9 @@ public class loginController {
                 map.put("msg","密码错误");
                 return map;
             }
-            request.getSession().setAttribute("student",student);
+            request.getSession().setAttribute("user",student);
         }
-
+        request.getSession().setAttribute("userType",type);
         map.put("type","success");
         map.put("msg","登录成功");
         return map;

@@ -41,7 +41,7 @@
 				dataType: "json", //返回数据类型
 				success: function(data){
 					if("success" == data.type){
-						window.location.href="index";
+						window.parent.location.href="index";
 					} else{
 						$.messager.alert("消息提醒", data.msg, "warning");
 						$("#vcodeImg").click();//切换验证码
@@ -72,13 +72,13 @@
       <div class="row cl">
         <label class="form-label col-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-8">
-          <input id="username" name="username" type="text" value="admin" placeholder="账户" class="input-text size-L">
+          <input id="username" name="username" type="text" placeholder="账户" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">
         <label class="form-label col-3"><i class="Hui-iconfont">&#xe60e;</i></label>
         <div class="formControls col-8">
-          <input id="password" name="password" type="password" value="123456" placeholder="密码" class="input-text size-L">
+          <input id="password" name="password" type="password"  placeholder="密码" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">
@@ -93,7 +93,7 @@
 			<label for="radio-1">学生</label>
 		</div>
 		<div class="radio-box">
-			<input type="radio" id="radio-1" name="type" checked value="1" />
+			<input type="radio" id="radio-1" name="type"  value="1" />
 			<label for="radio-2">管理员</label>
 		</div>
 	</div>
